@@ -11,3 +11,6 @@ All this code was just my hands on code from Udemy course [Vue - The Complete Gu
     - [Course 3 - Interpolation and Data Binding](https://github.com/fendis0709/vue-js-course/tree/master/section-2/course-3-interpolation-and-data-binding)
     - [Course 4 - Vue Bind Directive](https://github.com/fendis0709/vue-js-course/tree/master/section-2/course-4-vue-bind)
     - [Course 5 - Vue Methods](https://github.com/fendis0709/vue-js-course/tree/master/section-2/course-5-vue-methods)
+    - [Course 7 - Vue HTML Raw](https://github.com/fendis0709/vue-js-course/tree/master/section-2/course-7-vue-html)
+    - [Assignment 1 - Basic App](https://github.com/fendis0709/vue-js-course/tree/master/section-2/assignment-1-basic-app)
+    - [Course 9 - Vue Event Binding](https://github.com/fendis0709/vue-js-course/tree/master/section-2/course-9-understanding-event-binding)
