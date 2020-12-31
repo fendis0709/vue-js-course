@@ -3,8 +3,8 @@ const buttonEl = document.querySelector('div#app button')
 const unorderListEl = document.querySelector('div#app ul')
 
 buttonEl.addEventListener('click', function () {
-    const listEl = document.createElement('li')
-    listEl.textContent = inputEl.value
-    unorderListEl.appendChild(listEl)
-    inputEl.value = ''
+  const listEl = document.createElement('li')
+  listEl.textContent = inputEl.value
+  unorderListEl.appendChild(listEl)
+  inputEl.value = ''
 })
