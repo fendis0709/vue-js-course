@@ -27,3 +27,6 @@ All this code was just my hands on code from Udemy course [Vue - The Complete Gu
     - [Course 2 - Conditional Rendering](https://github.com/fendis0709/vue-js-course/tree/master/section-3/course-2-conditional-rendering)
     - [Course 3 - Rendering Through Looping](https://github.com/fendis0709/vue-js-course/tree/master/section-3/course-3-rendering-through-loop)
     - [Assignment 1 - Conditional Looping](https://github.com/fendis0709/vue-js-course/tree/master/section-3/assignment-1-conditional-looping)
+4. [**Section 4 - Project RPG Game** (Content unavailable)](#)
+5. [**Section 5 - Vue Lifecycle**](https://github.com/fendis0709/vue-js-course/tree/master/section-5)
+    - [Course 1 - Vue instance lifecycle](https://github.com/fendis0709/vue-js-course/tree/master/section-5/course-1-vue-lifecycle-hooks)
