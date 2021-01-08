@@ -22,3 +22,7 @@ All this code was just my hands on code from Udemy course [Vue - The Complete Gu
     - [Course 15 - Computed Property](https://github.com/fendis0709/vue-js-course/tree/master/section-2/course-15-vue-computed)
     - [Course 16 - Watcher Property](https://github.com/fendis0709/vue-js-course/tree/master/section-2/course-16-vue-watcher)
     - [Assignment 3 - Reactivity](https://github.com/fendis0709/vue-js-course/tree/master/section-2/assignment-3-reactivity)
+3. [**Section 3 - Rendering Conditional Content and Lists**](https://github.com/fendis0709/vue-js-course/tree/master/section-3)
+    - [Course 2 - Conditional Rendering](https://github.com/fendis0709/vue-js-course/tree/master/section-3/course-2-conditional-rendering)
+    - [Course 3 - Rendering Through Looping](https://github.com/fendis0709/vue-js-course/tree/master/section-3/course-3-rendering-through-loop)
+    - [Assignment 1 - Conditional Looping](https://github.com/fendis0709/vue-js-course/tree/master/section-3/assignment-1-conditional-looping)
