@@ -1,10 +1,10 @@
 <template>
   <div>
-    <h2>{{ anime.name }}</h2>
+    <h2>{{ name }}</h2>
     <button @click="toggleDetail()">{{ toggleDetailText }}</button>
     <ul v-show="showDetail">
-      <li>Release Day: {{ anime.releaseDay }}</li>
-      <li>Genre(s): {{ genres }}</li>
+      <li>Release Day: {{ releaseDay }}</li>
+      <li>Genre(s): {{ genreList }}</li>
     </ul>
   </div>
 </template>
@@ -12,7 +12,26 @@
 <script>
 export default {
   props: {
-    anime: Object,
+    name: String,
+    genres: Array,
+    releaseDay: {
+      type: String,
+      required: false,
+      default: "-",
+      validator: (value) => {
+        const validDays = [
+          "-",
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday",
+        ];
+        return validDays.includes(value);
+      },
+    },
   },
   data() {
     return {
@@ -28,8 +47,8 @@ export default {
     toggleDetailText() {
       return this.showDetail ? "Show Details" : "Hide Details";
     },
-    genres() {
-      return this.anime.genres.join(", ");
+    genreList() {
+      return this.genres.join(", ");
     },
   },
 };

@@ -5,7 +5,11 @@
     </header>
     <ul>
       <li v-for="watchList in watchLists" :key="watchList.id">
-        <watch-list :anime="watchList"></watch-list>
+        <watch-list
+          :name="watchList.name"
+          :release-day="watchList.releaseDay"
+          :genres="watchList.genres"
+        ></watch-list>
       </li>
     </ul>
   </section>
@@ -25,7 +29,6 @@ export default {
         {
           id: 2,
           name: "Yakusoku no Neverland",
-          releaseDay: "Thursday",
           genres: ["Adventure", "Monster"],
         },
       ],
