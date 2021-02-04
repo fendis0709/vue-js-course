@@ -1,9 +1,9 @@
 <template>
   <div>
-    <h2>{{ watchList.name }}</h2>
+    <h2>{{ anime.name }}</h2>
     <button @click="toggleDetail()">{{ toggleDetailText }}</button>
     <ul v-show="showDetail">
-      <li>Release Day: {{ watchList.day }}</li>
+      <li>Release Day: {{ anime.releaseDay }}</li>
       <li>Genre(s): {{ genres }}</li>
     </ul>
   </div>
@@ -11,15 +11,12 @@
 
 <script>
 export default {
+  props: {
+    anime: Object,
+  },
   data() {
     return {
       showDetail: false,
-      watchList: {
-        id: 1,
-        name: "Shingeki no Kyojin Final Season",
-        day: "Sunday",
-        genres: ["Action", "Adventure", "Shounen", "Supranatural"],
-      },
     };
   },
   methods: {
@@ -32,7 +29,7 @@ export default {
       return this.showDetail ? "Show Details" : "Hide Details";
     },
     genres() {
-      return this.watchList.genres.join(", ");
+      return this.anime.genres.join(", ");
     },
   },
 };
