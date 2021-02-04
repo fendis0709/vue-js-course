@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>{{ watchList.name }}</h2>
-    <button @click="toggleDetail()">Show Details</button>
+    <button @click="toggleDetail()">{{ toggleDetailText }}</button>
     <ul v-show="showDetail">
       <li>Release Day: {{ watchList.day }}</li>
       <li>Genre(s): {{ genres }}</li>
@@ -28,6 +28,9 @@ export default {
     },
   },
   computed: {
+    toggleDetailText() {
+      return this.showDetail ? "Show Details" : "Hide Details";
+    },
     genres() {
       return this.watchList.genres.join(", ");
     },
@@ -36,12 +39,13 @@ export default {
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css2?family=Jost&display=swap");
 * {
   box-sizing: border-box;
 }
 
 html {
-  font-family: 'Jost', sans-serif;
+  font-family: "Jost", sans-serif;
 }
 
 body {
@@ -93,7 +97,8 @@ header {
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.26);
 }
 
-#app button:hover, #app button:active {
+#app button:hover,
+#app button:active {
   background-color: #ec3169;
   border-color: #ec3169;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.26);
