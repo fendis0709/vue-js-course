@@ -37,6 +37,7 @@ export default {
       },
     },
   },
+  emits: ["toggle-favorite"],
   data() {
     return {
       showDetail: false,
