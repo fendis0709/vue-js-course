@@ -3,6 +3,10 @@
     <header>
       <h1>My Watch List</h1>
     </header>
+    <div>
+      <add-watch-list @add-watch-list="addWatchList"></add-watch-list>
+    </div>
+    <hr />
     <ul>
       <li v-for="watchList in watchLists" :key="watchList.id">
         <watch-list
@@ -43,6 +47,17 @@ export default {
     toggleFavorite(id) {
       let watchList = this.watchLists.find((watchList) => watchList.id === id);
       watchList.isFavorite = !watchList.isFavorite;
+    },
+    addWatchList(anime) {
+      const counter = this.watchLists.length;
+      const newAnime = {
+        id: counter + 1,
+        name: anime.name,
+        releaseDay: anime.releaseDay,
+        genres: [anime.genre],
+        isFavorite: false,
+      };
+      this.watchLists.push(newAnime);
     },
   },
 };
