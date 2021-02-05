@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h2>{{ name }}</h2>
+    <h2>{{ fullName }}</h2>
+    <button @click="toggleFavorite(id)">Set Favorite</button>
+    <hr />
     <button @click="toggleDetail()">{{ toggleDetailText }}</button>
     <ul v-show="showDetail">
       <li>Release Day: {{ releaseDay }}</li>
@@ -12,8 +14,10 @@
 <script>
 export default {
   props: {
+    id: Number,
     name: String,
     genres: Array,
+    isFavorite: Boolean,
     releaseDay: {
       type: String,
       required: false,
@@ -42,10 +46,17 @@ export default {
     toggleDetail() {
       this.showDetail = !this.showDetail;
     },
+    toggleFavorite() {
+      this.$emit("toggle-favorite", this.id);
+    },
   },
   computed: {
+    fullName() {
+      const favoriteText = this.isFavorite ? " (Favorite)" : "";
+      return this.name + favoriteText;
+    },
     toggleDetailText() {
-      return this.showDetail ? "Show Details" : "Hide Details";
+      return !this.showDetail ? "Show Details" : "Hide Details";
     },
     genreList() {
       return this.genres.join(", ");
