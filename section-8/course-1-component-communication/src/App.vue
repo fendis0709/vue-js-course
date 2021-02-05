@@ -16,6 +16,7 @@
           :genres="watchList.genres"
           :is-favorite="watchList.isFavorite"
           @toggle-favorite="toggleFavorite"
+          @delete-watch-list="deleteWatchList"
         ></watch-list>
       </li>
     </ul>
@@ -58,6 +59,12 @@ export default {
         isFavorite: false,
       };
       this.watchLists.push(newAnime);
+    },
+    deleteWatchList(id) {
+      const watchLists = this.watchLists.filter(
+        (watchList) => watchList.id !== id
+      );
+      this.watchLists = watchLists;
     },
   },
 };

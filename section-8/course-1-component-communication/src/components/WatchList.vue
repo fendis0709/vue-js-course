@@ -2,6 +2,8 @@
   <div>
     <h2>{{ fullName }}</h2>
     <button @click="toggleFavorite(id)">Set Favorite</button>
+    &nbsp;
+    <button @click="deleteWatchList(id)">Delete !</button>
     <hr />
     <button @click="toggleDetail()">{{ toggleDetailText }}</button>
     <ul v-show="showDetail">
@@ -37,7 +39,7 @@ export default {
       },
     },
   },
-  emits: ["toggle-favorite"],
+  emits: ["toggle-favorite", "delete-watch-list"],
   data() {
     return {
       showDetail: false,
@@ -49,6 +51,9 @@ export default {
     },
     toggleFavorite() {
       this.$emit("toggle-favorite", this.id);
+    },
+    deleteWatchList(id) {
+      this.$emit("delete-watch-list", id);
     },
   },
   computed: {
