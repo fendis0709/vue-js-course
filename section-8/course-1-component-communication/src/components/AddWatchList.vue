@@ -33,6 +33,9 @@ export default {
   methods: {
     submitData() {
       this.$emit("add-watch-list", this.anime);
+      this.anime.name = null;
+      this.anime.releaseDay = null;
+      this.anime.genre = null;
     },
   },
 };
