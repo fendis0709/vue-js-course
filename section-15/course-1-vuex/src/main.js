@@ -17,6 +17,13 @@ const appStore = createStore({
       state.counterGlobal = 0;
     }
   },
+  actions: {
+    asyncIncrement(context, numberOfIncrease = 1) {
+      setTimeout(function () {
+        context.commit('increment', numberOfIncrease);
+      }, 1500);
+    }
+  },
   getters: {
     counter(state) {
       return state.counterGlobal;

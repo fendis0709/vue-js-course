@@ -7,6 +7,8 @@
       &nbsp;
       <button @click="addCounterVuex(5)">Add counter (5)</button>
       &nbsp;
+      <button @click="asyncAddCounterVuex(10)">Add counter (10)</button>
+      &nbsp;
       <button @click="resetCounterVuex()">Reset counter</button>
     </base-container>
     <base-container title="Without Vuex">
@@ -38,6 +40,9 @@ export default {
     },
     addCounterVuex(increment = 1) {
       this.$store.commit('increment', increment);
+    },
+    asyncAddCounterVuex(increment = 1) {
+      this.$store.dispatch('asyncIncrement', increment);
     },
     resetCounterVuex() {
       this.$store.commit('reset');
