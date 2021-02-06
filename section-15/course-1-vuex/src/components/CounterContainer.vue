@@ -1,13 +1,22 @@
 <template>
-  <h2>{{ counter }}</h2>
+  <h2>{{ counterNumber }}</h2>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   computed: {
-    counter() {
-      return this.$store.getters.counter;
-    },
+    // Using tradition method
+    // counter() {
+    //   return this.$store.getters.counter;
+    // },
+    // Using modern method
+    // ...mapGetters(['counter']),
+    // Using modern method #2
+    ...mapGetters({
+      counterNumber: 'counter'
+    })
   },
 };
 </script>

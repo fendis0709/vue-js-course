@@ -5,9 +5,11 @@
       <counter-factorial></counter-factorial>
       <button @click="addCounterVuex()">Add counter (1)</button>
       &nbsp;
+      <button @click="addCounterVuexMap(2)">Add counter (2)</button>
+      &nbsp;
       <button @click="addCounterVuex(5)">Add counter (5)</button>
       &nbsp;
-      <button @click="asyncAddCounterVuex(10)">Add counter (10)</button>
+      <button @click="asyncAddCounterVuex(10)">Add counter (10 - Async)</button>
       &nbsp;
       <button @click="resetCounterVuex()">Reset counter</button>
     </base-container>
@@ -19,6 +21,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import BaseContainer from './components/BaseContainer.vue';
 import CounterContainer from './components/CounterContainer.vue';
 import CounterFactorial from './components/CounterFactorialContainer.vue';
@@ -47,6 +50,12 @@ export default {
     resetCounterVuex() {
       this.$store.commit('reset');
     },
+    // Using Map Actions #1
+    // ...mapActions(['increment']),
+    // Using Map Actions #2
+    ...mapActions({
+      addCounterVuexMap: 'asyncIncrement',
+    }),
   },
 };
 </script>
