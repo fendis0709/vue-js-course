@@ -2,9 +2,12 @@
   <div>
     <base-container title="Vuex">
       <counter-container></counter-container>
+      <counter-factorial></counter-factorial>
       <button @click="addCounterVuex()">Add counter (1)</button>
       &nbsp;
       <button @click="addCounterVuex(5)">Add counter (5)</button>
+      &nbsp;
+      <button @click="resetCounterVuex()">Reset counter</button>
     </base-container>
     <base-container title="Without Vuex">
       <h2>{{ counterLocal }}</h2>
@@ -16,11 +19,13 @@
 <script>
 import BaseContainer from './components/BaseContainer.vue';
 import CounterContainer from './components/CounterContainer.vue';
+import CounterFactorial from './components/CounterFactorialContainer.vue';
 
 export default {
   components: {
     BaseContainer,
     CounterContainer,
+    CounterFactorial,
   },
   data() {
     return {
@@ -33,6 +38,9 @@ export default {
     },
     addCounterVuex(increment = 1) {
       this.$store.commit('increment', increment);
+    },
+    resetCounterVuex() {
+      this.$store.commit('reset');
     },
   },
 };
