@@ -1,6 +1,11 @@
 <template>
-  <learning-survey @survey-submit="storeSurvey"></learning-survey>
-  <user-experiences :results="savedSurveyResults"></user-experiences>
+  <div>
+    <learning-survey @fetch-data="doFetchData"></learning-survey>
+    <user-experiences
+      :do-fetch-data="isFetchData"
+      @reset-fetch-data="resetFetchData"
+    ></user-experiences>
+  </div>
 </template>
 
 <script>
@@ -14,18 +19,15 @@ export default {
   },
   data() {
     return {
-      savedSurveyResults: [],
+      isFetchData: false,
     };
   },
   methods: {
-    storeSurvey(surveyData) {
-      const surveyResult = {
-        name: surveyData.userName,
-        rating: surveyData.rating,
-        id: new Date().toISOString(),
-      };
-      this.savedSurveyResults.push(surveyResult);
-      console.log(surveyResult);
+    doFetchData() {
+      this.isFetchData = true;
+    },
+    resetFetchData() {
+      this.isFetchData = false;
     },
   },
 };

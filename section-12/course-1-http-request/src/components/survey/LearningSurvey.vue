@@ -9,7 +9,13 @@
         </div>
         <h3>My learning experience was ...</h3>
         <div class="form-control">
-          <input type="radio" id="rating-poor" value="poor" name="rating" v-model="chosenRating" />
+          <input
+            type="radio"
+            id="rating-poor"
+            value="poor"
+            name="rating"
+            v-model="chosenRating"
+          />
           <label for="rating-poor">Poor</label>
         </div>
         <div class="form-control">
@@ -23,12 +29,19 @@
           <label for="rating-average">Average</label>
         </div>
         <div class="form-control">
-          <input type="radio" id="rating-great" value="great" name="rating" v-model="chosenRating" />
+          <input
+            type="radio"
+            id="rating-great"
+            value="great"
+            name="rating"
+            v-model="chosenRating"
+          />
           <label for="rating-great">Great</label>
         </div>
-        <p
-          v-if="invalidInput"
-        >One or more input fields are invalid. Please check your provided data.</p>
+        <p v-if="invalidInput">
+          One or more input fields are invalid. Please check your provided data.
+        </p>
+        <p v-if="errorMessage">{{ errorMessage }}</p>
         <div>
           <base-button>Submit</base-button>
         </div>
@@ -44,21 +57,40 @@ export default {
       enteredName: '',
       chosenRating: null,
       invalidInput: false,
+      errorMessage: null,
     };
   },
-  emits: ['survey-submit'],
+  emits: ['fetch-data'],
   methods: {
     submitSurvey() {
       if (this.enteredName === '' || !this.chosenRating) {
         this.invalidInput = true;
         return;
       }
+
       this.invalidInput = false;
 
-      this.$emit('survey-submit', {
-        userName: this.enteredName,
-        rating: this.chosenRating,
-      });
+      fetch('https://vue-app-39aff-default-rtdb.firebaseio.com/survey.json', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: new Date().getTime(),
+          name: this.enteredName,
+          rate: this.chosenRating,
+          submitted_at: new Date().toISOString(),
+        }),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error('Something went wrong. Please try again later.');
+          }
+          this.$emit('fetch-data', true);
+        })
+        .catch((error) => {
+          this.errorMessage = error.message;
+        });
 
       this.enteredName = '';
       this.chosenRating = null;
