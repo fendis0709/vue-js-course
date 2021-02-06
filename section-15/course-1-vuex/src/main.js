@@ -8,6 +8,11 @@ const appStore = createStore({
     return {
       counterGlobal: 0
     }
+  },
+  mutations: {
+    increment(state, numberOfIncrease = 1) {
+      state.counterGlobal = state.counterGlobal + numberOfIncrease;
+    }
   }
 })
 
