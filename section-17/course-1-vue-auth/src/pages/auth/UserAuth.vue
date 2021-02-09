@@ -1,34 +1,39 @@
 <template>
-  <base-card>
-    <form @submit.prevent="doLogin">
-      <div class="form-control">
-        <label for="email">Email</label>
-        <input type="text" name="email" id="email" v-model.trim="email" autofocus/>
-      </div>
-      <div class="form-control">
-        <label for="email">Password</label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          v-model.trim="password"
-        />
-      </div>
-      <p v-if="!formIsValid">
-        <ul>
-          <li>Email and Password are required</li>
-          <li>Password minimum has 6 chars long</li>
-        </ul>
-      </p>
-      <p v-if="errorMessage" style="color: red;">
-        {{ errorMessage }}
-      </p>
-      <base-button type="submit"> Login </base-button>
-      <base-button type="button" mode="flat" @click="doSignUp">
-        Signup
-      </base-button>
-    </form>
-  </base-card>
+  <div>
+    <base-dialog :show="isLoading" title="Authenticating..." fixed>
+      <base-spinner></base-spinner>
+    </base-dialog>
+    <base-card>
+      <form @submit.prevent="doSignIn">
+        <div class="form-control">
+          <label for="email">Email</label>
+          <input type="text" name="email" id="email" v-model.trim="email" autofocus/>
+        </div>
+        <div class="form-control">
+          <label for="email">Password</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            v-model.trim="password"
+          />
+        </div>
+        <p v-if="!formIsValid">
+          <ul>
+            <li>Email and Password are required</li>
+            <li>Password minimum has 6 chars long</li>
+          </ul>
+        </p>
+        <p v-if="errorMessage" style="color: red;">
+          {{ errorMessage }}
+        </p>
+        <base-button type="submit"> Login </base-button>
+        <base-button type="button" mode="flat" @click="doSignUp">
+          Signup
+        </base-button>
+      </form>
+    </base-card>
+  </div>
 </template>
 
 <script>
@@ -39,38 +44,60 @@ export default {
       password: '',
       formIsValid: true,
       errorMessage: null,
+      isLoading: false,
     };
   },
   methods: {
     validateForm() {
       this.formIsValid = true;
+      this.errorMessage = null;
       if (this.email == '' || this.password == '' || this.password.length < 6) {
-        console.log('INVALID');
         this.formIsValid = false;
       }
     },
-    doLogin() {
-      console.log('AUTH');
+    async doSignIn() {
+      this.isLoading = true;
 
       this.validateForm();
 
       if (this.formIsValid) {
-        console.log('VALID');
-        // Send http request
-      }
-    },
-    doSignUp() {
-      this.validateForm();
-      if (this.formIsValid) {
-        this.$store
-          .dispatch('signup', {
+        try {
+          await this.$store.dispatch('signin', {
             email: this.email,
             password: this.password,
-          })
-          .catch((error) => {
-            this.errorMessage = error.message;
           });
+        } catch (error) {
+          this.errorMessage = error.message;
+          this.isLoading = false;
+          return;
+        }
       }
+
+      this.isLoading = false;
+
+      alert('Login success!');
+    },
+    async doSignUp() {
+      this.isLoading = true;
+
+      this.validateForm();
+
+      if (this.formIsValid) {
+        try {
+          await this.$store.dispatch('signup', {
+            email: this.email,
+            password: this.password,
+          });
+        } catch (error) {
+          this.errorMessage = error.message;
+          this.isLoading = false;
+          return;
+        }
+      }
+
+      this.isLoading = false;
+
+      alert('Register success!');
     },
   },
 };
