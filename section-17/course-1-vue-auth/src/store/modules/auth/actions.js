@@ -89,5 +89,7 @@ export default {
       token: null,
       tokenLifetime: null
     })
+
+    context.commit('removeUser')
   }
 }
