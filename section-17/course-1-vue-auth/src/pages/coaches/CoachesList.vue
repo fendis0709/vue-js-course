@@ -1,6 +1,10 @@
 <template>
   <div>
-    <base-dialog :show="!!error" title="An error occurred!" @close="handleError">
+    <base-dialog
+      :show="!!error"
+      title="An error occurred!"
+      @close="handleError"
+    >
       <p>{{ error }}</p>
     </base-dialog>
     <section>
@@ -9,8 +13,13 @@
     <section>
       <base-card>
         <div class="controls">
-          <base-button mode="outline" @click="loadCoaches(true)">Refresh</base-button>
-          <base-button v-if="!isCoach && !isLoading" link to="/register">Register as Coach</base-button>
+          <base-button mode="outline" @click="loadCoaches(true)">
+            Refresh
+          </base-button>
+          <base-button v-if="!isLoggedIn" link to="/auth"> Login </base-button>
+          <base-button v-if="showRegisterCoachButton" link to="/register">
+            Register as Coach
+          </base-button>
         </div>
         <div v-if="isLoading">
           <base-spinner></base-spinner>
@@ -53,6 +62,9 @@ export default {
     };
   },
   computed: {
+    isLoggedIn() {
+      return this.$store.getters.isAuthenticated;
+    },
     isCoach() {
       return this.$store.getters['coaches/isCoach'];
     },
@@ -73,6 +85,9 @@ export default {
     },
     hasCoaches() {
       return !this.isLoading && this.$store.getters['coaches/hasCoaches'];
+    },
+    showRegisterCoachButton() {
+      return this.isLoggedIn && !this.isCoach && !this.isLoading;
     },
   },
   created() {

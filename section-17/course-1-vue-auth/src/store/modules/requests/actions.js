@@ -4,7 +4,8 @@ export default {
       userEmail: payload.email,
       message: payload.message
     };
-    const response = await fetch(`https://vue-app-39aff-default-rtdb.firebaseio.com/requests/${payload.coachId}.json`, {
+    const token = context.rootGetters.token;
+    const response = await fetch(`https://vue-app-39aff-default-rtdb.firebaseio.com/requests/${payload.coachId}.json?auth=${token}`, {
       method: 'POST',
       body: JSON.stringify(newRequest)
     });
@@ -22,8 +23,9 @@ export default {
     context.commit('addRequest', newRequest);
   },
   async fetchRequests(context) {
+    const token = context.rootGetters.token;
     const coachId = context.rootGetters.userId;
-    const response = await fetch(`https://vue-app-39aff-default-rtdb.firebaseio.com/requests/${coachId}.json`);
+    const response = await fetch(`https://vue-app-39aff-default-rtdb.firebaseio.com/requests/${coachId}.json?auth=${token}`);
     const responseData = await response.json();
 
     if (!response.ok) {

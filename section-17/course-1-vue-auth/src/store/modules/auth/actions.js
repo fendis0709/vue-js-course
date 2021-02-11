@@ -62,5 +62,12 @@ export default {
       token: responseJson.idToken,
       tokenLifetime: responseJson.expiresIn
     })
+  },
+  signout(context) {
+    context.commit('setUser', {
+      userId: null,
+      token: null,
+      tokenLifetime: null
+    })
   }
 }
