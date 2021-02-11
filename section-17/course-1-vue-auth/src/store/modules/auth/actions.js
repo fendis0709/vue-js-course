@@ -1,3 +1,5 @@
+let signoutTimer;
+
 const apiKey = 'AIzaSyChJHRw8HNpOrHK3ahvOH6DQhaoNgC-48M';
 
 export default {
@@ -60,34 +62,52 @@ export default {
       throw new Error(errorMessage);
     }
 
+    signoutTimer = setTimeout(function () {
+      context.dispatch('signout')
+    }, responseJson.expiresIn);
+
     context.commit('setUser', {
       userId: responseJson.localId,
-      token: responseJson.idToken,
-      tokenLifetime: responseJson.expiresIn
+      token: responseJson.idToken
     })
+
+    // const expiresAt = new Date().getTime() + (parseInt(responseJson.expiresIn) * 1000);
+    const expiresAt = new Date().getTime() + (3595 * 1000);
 
     context.commit('storeUser', {
       userId: responseJson.localId,
-      token: responseJson.idToken
+      token: responseJson.idToken,
+      tokenExpiresAt: expiresAt
     })
   },
   autoSignin(context) {
     const vueToken = localStorage.getItem('vue__token');
     const vueUserId = localStorage.getItem('vue__user_id');
+    const vueTokenExpiresAt = localStorage.getItem('vue__token_expires_at');
+
+    const timeout = parseInt(vueTokenExpiresAt) - new Date().getTime();
+
+    if (timeout < 0) {
+      return context.dispatch('signout')
+    }
+
+    signoutTimer = setTimeout(function () {
+      context.dispatch('signout')
+    }, timeout);
 
     if (vueToken && vueUserId) {
       context.commit('setUser', {
         userId: vueUserId,
-        token: vueToken,
-        tokenLifetime: null
+        token: vueToken
       })
     }
   },
   signout(context) {
+    clearTimeout(signoutTimer)
+
     context.commit('setUser', {
       userId: null,
-      token: null,
-      tokenLifetime: null
+      token: null
     })
 
     context.commit('removeUser')
