@@ -40,8 +40,8 @@
 export default {
   data() {
     return {
-      email: '',
-      password: '',
+      email: 'fendi@dokternet.com',
+      password: 'pasien123',
       formIsValid: true,
       errorMessage: null,
       isLoading: false,
@@ -66,16 +66,13 @@ export default {
             email: this.email,
             password: this.password,
           });
+          this.isLoading = false;
+          this.$router.replace('/coaches');
         } catch (error) {
           this.errorMessage = error.message;
           this.isLoading = false;
-          return;
         }
       }
-
-      this.isLoading = false;
-
-      alert('Login success!');
     },
     async doSignUp() {
       this.isLoading = true;
