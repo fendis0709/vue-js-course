@@ -71,8 +71,7 @@ export default {
       token: responseJson.idToken
     })
 
-    // const expiresAt = new Date().getTime() + (parseInt(responseJson.expiresIn) * 1000);
-    const expiresAt = new Date().getTime() + (3595 * 1000);
+    const expiresAt = new Date().getTime() + (parseInt(responseJson.expiresIn) * 1000);
 
     context.commit('storeUser', {
       userId: responseJson.localId,
