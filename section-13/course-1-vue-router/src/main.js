@@ -17,8 +17,9 @@ const router = createRouter({
     {
       path: '/users',
       component: Users
-    }
-  ]
+    },
+  ],
+  linkActiveClass: 'active'
 })
 
 app
